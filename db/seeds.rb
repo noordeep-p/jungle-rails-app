@@ -132,5 +132,27 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## SALES
+
+Sale.create!({
+  name:  'March Break',
+  percent_off: 15,
+  starts_on: 30.days.ago,
+  ends_on: 10.days.ago,
+})
+
+Sale.create!({
+  name:  'Upcoming Sale',
+  percent_off: 15,
+  starts_on: 30.days.from_now,
+  ends_on: 60.days.from_now,
+})
+
+Sale.create!({
+  name:  'Active Sale',
+  percent_off: 15,
+  starts_on: 30.days.ago,
+  ends_on: 10.days.from_now,
+})
 
 puts "DONE!"
