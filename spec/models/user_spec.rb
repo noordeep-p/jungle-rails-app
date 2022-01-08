@@ -64,6 +64,23 @@ RSpec.describe User, type: :model do
       expect(user2).to be_invalid
     end
 
+    it 'password length to be minimum 5 characters' do
+      # invalid entry
+      user = User.new
+      user.name = "name"
+      user.email = 'test@test.com'
+      user.password = '1234'
+      user.password_confirmation = '1234'
+      expect(user).to be_invalid
+      # invalid entry
+      user = User.new
+      user.name = "name"
+      user.email = 'test@test.com'
+      user.password = '12345'
+      user.password_confirmation = '12345'
+      expect(user).to be_valid
+    end
 
+    
   end
 end
