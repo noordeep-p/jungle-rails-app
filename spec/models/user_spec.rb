@@ -33,7 +33,6 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).not_to include("can't be blank")
     end
 
-
     it "password don't match" do
       user = User.new(
         name: 'user_name',
@@ -43,6 +42,26 @@ RSpec.describe User, type: :model do
       )
       user.valid?
       expect(user.errors[:password_confirmation]).to be_present
+    end
+
+    it 'email must be not already exist in db' do
+      user = User.new
+      user.name = 'name'
+      user.email = 'test@test.com'
+      user.password = 'password'
+      user.password_confirmation = 'password'
+
+      user.save
+    
+      user2 = User.new
+      user2.name = 'name'
+      user2.email = 'test@test.com'
+      user2.password = 'password'
+      user2.password_confirmation = 'password'
+
+      user2.save
+    
+      expect(user2).to be_invalid
     end
 
 
