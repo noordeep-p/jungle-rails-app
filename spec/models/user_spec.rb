@@ -33,5 +33,18 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).not_to include("can't be blank")
     end
 
+
+    it "password don't match" do
+      user = User.new(
+        name: 'user_name',
+        email: 'testing@test.com',
+        password: 'password',
+        password_confirmation: 'passwo'
+      )
+      user.valid?
+      expect(user.errors[:password_confirmation]).to be_present
+    end
+
+
   end
 end
